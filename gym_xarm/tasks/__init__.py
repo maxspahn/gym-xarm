@@ -2,6 +2,7 @@ from collections import OrderedDict
 
 from gym_xarm.tasks.base import Base as Base
 from gym_xarm.tasks.lift import Lift
+from gym_xarm.tasks.lift_controlled import LiftControlled
 
 # from gym_xarm.tasks.peg_in_box import PegInBox
 # from gym_xarm.tasks.push import Push
@@ -42,6 +43,15 @@ TASKS = OrderedDict(
             {
                 "env": Lift,
                 "action_space": "xyzw",
+                "episode_length": 50,
+                "description": "Lift a cube above a height threshold",
+            },
+        ),
+        (
+            "lift-controlled",
+            {
+                "env": LiftControlled,
+                "action_space": "q1q2q3q4q5q6",
                 "episode_length": 50,
                 "description": "Lift a cube above a height threshold",
             },

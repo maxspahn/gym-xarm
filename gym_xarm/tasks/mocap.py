@@ -15,6 +15,14 @@ def apply_action(model, model_names, data, action):
         data.mocap_pos[:] = data.mocap_pos + pos_delta
         data.mocap_quat[:] = data.mocap_quat + quat_delta
 
+def apply_controller_action(model, model_names, data, action):
+    pos_action, gripper_action = np.split(action, (7,))
+    for i in range(7):
+        data.ctrl[i] = pos_action[i]
+    if data.ctrl is not None:
+        for i in range(gripper_action.shape[0]):
+            data.ctrl[i+7] = gripper_action[i]
+
 
 def reset(model, data):
     if model.nmocap > 0 and model.eq_data is not None:
